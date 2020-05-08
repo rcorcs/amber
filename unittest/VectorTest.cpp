@@ -74,8 +74,3 @@ TEST(Vector, addCopyVec2f) {
   EXPECT_EQ(4, c[0]);	
   EXPECT_EQ(6, c[1]);	
 }
-
-int main(int argc, char* argv[]) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
