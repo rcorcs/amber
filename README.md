@@ -3,7 +3,7 @@
 ### Dependencies
 
 Core library:
-* OpenGL (GL GLU)
+* OpenGL (GL, GLU)
 * GLFW3
 * libPNG
 * libJPEG
