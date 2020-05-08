@@ -4,11 +4,6 @@
 
 #include <cstdint>
 
-const size_t RED = 0;
-const size_t GREEN = 1;
-const size_t BLUE = 2;
-const size_t ALPHA = 3;
-
 template<size_t sz, class ArrayTy>
 class PixelAccessTrait : public ArrayTy {
 public:
@@ -66,12 +61,19 @@ public:
   typename ArrayTy::value_type &alpha(typename ArrayTy::value_type val) { return alpha() = val; }
 };
 
-
 template<size_t size>
 using Pixel = VectorTraits< PixelAccessTrait< size, RawArray<uint8_t,size> > >;
+
+template<size_t size>
+using RangePixel = VectorTraits< PixelAccessTrait< size, RawArray<float,size> > >;
 
 using Grey = Pixel<1>;
 using RGB  = Pixel<3>;
 using RGBA = Pixel<4>;
 
+using RangeGrey = RangePixel<1>;
+using RangeRGB  = RangePixel<3>;
+using RangeRGBA = RangePixel<4>;
+
 using PixelRef = VectorRef<uint8_t>;
+using RangePixelRef = VectorRef<float>;
