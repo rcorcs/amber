@@ -5,6 +5,8 @@
 Core library:
 * OpenGL (GL GLU)
 * GLFW3
+* libPNG
+* libJPEG
 
 Unit testing:
 * Google testing framework (gtest)
