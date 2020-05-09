@@ -31,3 +31,13 @@ public:
       glDeleteTextures(1, &id);
     }
 };
+
+class TextureIO {
+public:
+    static Texture loadFromFile(const char *filepath) {
+        Image image = ImageIO::loadFromFile(filepath);
+        Texture texture(image);
+        image.release();
+        return texture;
+    }
+};

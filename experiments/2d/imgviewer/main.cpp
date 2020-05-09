@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    Window window(DEFAULT_WIDTH, DEFAULT_HEIGHT, "Image Viewer", RangeRGBA(1,1,1,1));
+    Window window(DEFAULT_WIDTH, DEFAULT_HEIGHT, "Image Viewer", true, RangeRGBA(1,1,1,1));
 
     Texture texture(image);
     image.release();

@@ -10,26 +10,6 @@
 #include <cstdlib>
 #include <string>
 
-/*
-Image::Image(size_t width, size_t height, size_t numChannels) {
-  create(width,height,numChannels);
-}
-
-bool Image::create(size_t w, size_t h, size_t d) {
-  if (data!=nullptr) return false;
-  data = new PixelRef::value_type[w*h*d];
-  width = w;
-  height = h;
-  numChannels = d;
-  return data!=nullptr;
-}
-
-void Image::releaseMemory() {
-  delete []data;
-  data = nullptr;
-}
-*/
-
 Image ImageIO::loadFromFile(const char *filepath, Image::FileFormat fmt) {
   FILE* file = fopen(filepath, "r");
   if(!file) {

@@ -23,14 +23,17 @@ class Window {
     std::string titleStr;
     GLFWwindow* glfwWindowPtr;
     Viewport vp;
+    double msPerFrame;
 public:
     std::function<void (Window &, int, int, int, int)> keyEventHandler;
-    Window(size_t width, size_t height, std::string name, RangeRGBA bgColor) : glfwWindowPtr(nullptr), titleStr(name) {
+    Window(size_t width, size_t height, std::string name, bool resizable, RangeRGBA bgColor) : glfwWindowPtr(nullptr), titleStr(name) {
+
         // start GL context and O/S window using the GLFW helper library
         if (!glfwInit()) {
             return;
         }
 
+        if (resizable) glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
         glfwWindowPtr = glfwCreateWindow(width, height, titleStr.c_str(), NULL, NULL);
         globalContexts[glfwWindowPtr] = Context(this);
 
@@ -80,11 +83,25 @@ public:
     }
 
     void runUntilClosed(std::function<void (Viewport &)> fn) {
+        double lastTime = glfwGetTime();
+        int fpsCounter = 0;
         while(!glfwWindowShouldClose(glfwWindowPtr)) {
             glfwPollEvents();
             vp.clear();
             fn(vp);
             glfwSwapBuffers(glfwWindowPtr);
+
+            // Measure speed
+            double currentTime = glfwGetTime();
+            msPerFrame = currentTime-lastTime;
+            lastTime = currentTime;
+
+            fpsCounter++;
+            if ( fpsCounter == 300){ // If last prinf() was more than 1 sec ago
+                printf("%f fps\n", 1.f/msPerFrame);
+                fpsCounter = 0;
+            }
+
         }
     }
 

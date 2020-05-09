@@ -31,7 +31,7 @@ public:
     size_t height() { return texture.height(); }
 
     void render(Viewport &vp) {
-        //glBindTexture( GL_TEXTURE_2D, texture.glId() ); /* Binding of texture name */
+        glBindTexture( GL_TEXTURE_2D, texture.glId() ); /* Binding of texture name */
         if (fill) {
             int w = vp.width(), h = vp.height();
             /* Draw a quad */
@@ -69,39 +69,34 @@ public:
 #define DEFAULT_HEIGHT 480
 
 int main(int argc, char **argv) {
-    Image image = ImageIO::loadFromFile("assets/mario.png");
-    if ( image.begin()==nullptr ) {
-        printf("Can't load character file\n");
-        return -1;
-    }
 
-    Window window(DEFAULT_WIDTH, DEFAULT_HEIGHT, "Mario", RangeRGBA(0,0,0,1));
+    Window window(1280, 720, "Mario", false, RangeRGBA(0,0,0,0));
 
-    Texture texture(image);
-    image.release();
+    Texture marioTexture = TextureIO::loadFromFile("assets/mario.png");
+    Texture bgTexture = TextureIO::loadFromFile("assets/background.jpg");
 
     Force<2> gravity = Force2D::down(1.f);
 
-    size_t floor = 600;
-    const auto floorY = floor-texture.height();
+    size_t floor = 625;
+    const auto floorY = floor-marioTexture.height();
 
-    Entity2D img2d(texture, 10, floorY);
+    Entity2D mario(marioTexture, 10, floorY);
+    Entity2D background(bgTexture, true);
     
     auto renderer = [&](Viewport &vp) {
-        img2d.render(vp);
-        img2d.move();
+        background.render(vp);
+        mario.render(vp);
+        mario.move();
 
-        img2d.apply(gravity);
+        mario.apply(gravity);
 
-        if (img2d.x() < 0) {
-            img2d.x(0);
-        }
-        if (img2d.x() + img2d.width() > vp.width()) {
-            img2d.x(vp.width()-img2d.width());
-        }
-        if (img2d.y() > floorY) {
-            img2d.y(floorY);
-            img2d.acceleration().y(0);
+        if (mario.x() < 0) mario.x(0);
+        if (mario.x() + mario.width() > vp.width())
+            mario.x(vp.width()-mario.width());
+        
+        if (mario.y() > floorY) {
+            mario.y(floorY);
+            mario.acceleration().y(0);
         }
     };
 
@@ -111,29 +106,31 @@ int main(int argc, char **argv) {
         switch(key) {
         case GLFW_KEY_RIGHT:
             if (action == GLFW_PRESS) {
-                img2d.apply(Force2D::right(5));
+                mario.apply(Force2D::right(5));
             }
             if (action == GLFW_RELEASE) {
-                img2d.apply(Force2D::right(-5));
+                mario.apply(Force2D::left(5));
             }
             break;
         case GLFW_KEY_LEFT:
             if (action == GLFW_PRESS) {
-                img2d.apply(Force2D::left(5));
+                mario.apply(Force2D::left(5));
             }
             if (action == GLFW_RELEASE) {
-                img2d.apply(Force2D::left(-5));
+                mario.apply(Force2D::right(5));
             }            
             break;
         case GLFW_KEY_SPACE:
             if (action == GLFW_PRESS) {
-                img2d.apply(Force2D::up(20));
+                if (mario.y()==floorY)
+                   mario.apply(Force2D::up(20));
             }
             break;
         }
     };
     window.runUntilClosed(renderer);
 
-    texture.release();
+    marioTexture.release();
+    bgTexture.release();
     window.release();
 }

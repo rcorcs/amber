@@ -22,7 +22,10 @@ public:
 
         glViewport(0, 0, width, height); // use a screen size of WIDTH x HEIGHT
         glEnable(GL_TEXTURE_2D);     // Enable 2D texturing
-        
+        glEnable(GL_BLEND);// you enable blending function
+        // then you will set flags to achieve desired blending effect.
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         glMatrixMode(GL_PROJECTION);     // Make a simple 2D projection on the entire window
         glLoadIdentity();
         glOrtho(0.0, width, height, 0.0, 0.0, 100.0);
@@ -61,6 +64,6 @@ public:
     void clear() {
         glClearColor(bgColor.red(),bgColor.green(),bgColor.blue(),bgColor.alpha()); 
         glClearDepth(0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the window
     }
 };

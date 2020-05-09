@@ -1,3 +1,3 @@
 add_subdirectory(imgviewer)
 add_subdirectory(fruits)
-add_subdirectory(character)
+add_subdirectory(mario)
