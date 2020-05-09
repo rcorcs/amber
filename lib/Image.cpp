@@ -1,5 +1,5 @@
 
-#include "Image.h"
+#include "Graphics/Image.h"
 
 #include <setjmp.h>
 #include <png.h>

@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Image.h"
+#include "Graphics/Image.h"
 
 // not necessary but makes my life much easier when I can just see the number
 // of bits and I dont have to write 'unsigned' as a separate word

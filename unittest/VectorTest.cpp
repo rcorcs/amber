@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "Vector.h"
+#include "Math/Vector.h"
 
 TEST(Vector, sizeOf) {
   EXPECT_EQ(sizeof(int)*2, sizeof(Vec2i)); 

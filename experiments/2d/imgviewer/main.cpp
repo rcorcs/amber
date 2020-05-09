@@ -5,10 +5,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Image.h"
-#include "Texture.h"
+#include "Graphics/Image.h"
+#include "Graphics/Texture.h"
 
-#include "Viewport.h"
+#include "Graphics/Viewport.h"
 #include "Window.h"
 
 class Entity2D {

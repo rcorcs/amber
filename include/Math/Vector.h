@@ -146,7 +146,6 @@ template<class ArrayTy>
 class VectorTraits : public ArrayTy {
 using this_type = VectorTraits<ArrayTy>;
 public: 
-
   VectorTraits() {}
 
   template<class... Args>
@@ -157,15 +156,35 @@ public:
     return VectorOperators::add(*this, v);
   }
 
+  this_type &add(typename ArrayTy::value_type v) {
+    for(typename ArrayTy::iterator it = ArrayTy::begin(), e = ArrayTy::end(); it!=e; it++) {
+      *it += v;
+    }
+    return *this;
+  }
+
   template<class AnyVecT>
   this_type operator+(AnyVecT &v) {
     this_type ans = *this;
     return VectorOperators::add(ans, v);
   }
 
+  this_type operator+(typename ArrayTy::value_type v) {
+    this_type ans = *this;
+    ans.add(v);
+    return ans;
+  }
+
   template<class AnyVecT>
   this_type &sub(AnyVecT &v) {
     return VectorOperators::sub(*this, v);
+  }
+
+  this_type &sub(typename ArrayTy::value_type v) {
+    for(typename ArrayTy::iterator it = ArrayTy::begin(), e = ArrayTy::end(); it!=e; it++) {
+      *it -= v;
+    }
+    return *this;
   }
 
   template<class AnyVecT>
@@ -174,9 +193,22 @@ public:
     return VectorOperators::sub(ans, v);
   }
 
+  this_type operator-(typename ArrayTy::value_type v) {
+    this_type ans = *this;
+    ans.sub(v);
+    return ans;
+  }
+
   template<class AnyVecT>
   this_type &mult(AnyVecT &v) {
     return VectorOperators::mult(*this, v);
+  }
+
+  this_type &mult(typename ArrayTy::value_type v) {
+    for(typename ArrayTy::iterator it = ArrayTy::begin(), e = ArrayTy::end(); it!=e; it++) {
+      *it *= v;
+    }
+    return *this;
   }
 
   template<class AnyVecT>
@@ -185,9 +217,22 @@ public:
     return VectorOperators::mult(ans, v);
   }
 
+  this_type operator*(typename ArrayTy::value_type v) {
+    this_type ans = *this;
+    ans.mult(v);
+    return ans;
+  }
+
   template<class AnyVecT>
   this_type &div(AnyVecT &v) {
     return VectorOperators::div(*this, v);
+  }
+
+  this_type &div(typename ArrayTy::value_type v) {
+    for(typename ArrayTy::iterator it = ArrayTy::begin(), e = ArrayTy::end(); it!=e; it++) {
+      *it /= v;
+    }
+    return *this;
   }
 
   template<class AnyVecT>
@@ -196,11 +241,16 @@ public:
     return VectorOperators::div(ans, v);
   }
 
+  this_type operator/(typename ArrayTy::value_type v) {
+    this_type ans = *this;
+    ans.div(v);
+    return ans;
+  }
+
   template<class AnyVecT>
   typename ArrayTy::value_type dot(AnyVecT &v) {
     return VectorOperators::dot(*this, v);
   }
-
 };
 
 template<class T, size_t sz>
