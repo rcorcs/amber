@@ -25,35 +25,26 @@ TEST(Vector, basicVec3API) {
   EXPECT_EQ(3, a.z());
 
   Vec3f b;
-  b.x() = 11;
-  b.y() = 13;
-  b.z() = 17;
+  b.x(11);
+  b.y(13);
+  b.z(17);
 
   EXPECT_EQ(11, b[0]);
   EXPECT_EQ(13, b[1]);
   EXPECT_EQ(17, b[2]);
 
-  Vec3f c;
-  c.x(21);
-  c.y(22);
-  c.z(23);
+  Vec3f c(21,22,23);
 
   EXPECT_EQ(21, c[0]);
   EXPECT_EQ(22, c[1]);
   EXPECT_EQ(23, c[2]);
 
-  Vec3f d(33,32,31);
-
-  EXPECT_EQ(33, d[0]);
-  EXPECT_EQ(32, d[1]);
-  EXPECT_EQ(31, d[2]);
-
   //testing assignment with different types
-  Vec3f e(40.f,41,42ul);
+  Vec3f d(40.f,41,42ul);
 
-  EXPECT_EQ(40.f, e[0]);
-  EXPECT_EQ(41.f, e[1]);
-  EXPECT_EQ(42.f, e[2]);
+  EXPECT_EQ(40.f, d[0]);
+  EXPECT_EQ(41.f, d[1]);
+  EXPECT_EQ(42.f, d[2]);
 }
 
 TEST(Vector, addCopyVec2f) {

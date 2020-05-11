@@ -7,15 +7,12 @@
 #include <cstddef>
 
 class Image : public NArray<PixelRef::value_type, 3> {
+using Base = NArray<PixelRef::value_type, 3>;
 public:
   enum FileFormat { JPEG, PNG };
 
-  size_t height() { return size(0); }
-  size_t width() { return size(1); }
-  size_t channels() { return size(2); }
-
   PixelRef get(size_t row, size_t col) {
-    return PixelRef(&at(row, col, 0), channels());
+    return PixelRef(&at(row, col, 0), Base::depth());
   }
 };
 

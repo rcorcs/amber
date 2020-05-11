@@ -19,10 +19,9 @@ public:
   template<class... Args>
   PixelAccessTrait(Args... values) : ArrayTy(values...) {}
 
+  const typename ArrayTy::value_type value() const { return ArrayTy::operator[](0); }
 
-  typename ArrayTy::value_type &value() { return ArrayTy::operator[](0); }
-
-  typename ArrayTy::value_type &value(typename ArrayTy::value_type val) { return value() = val; }
+  void value(typename ArrayTy::value_type val) { value() = val; }
 
 };
 
@@ -34,13 +33,13 @@ public:
   PixelAccessTrait(Args... values) : ArrayTy(values...) {}
 
 
-  typename ArrayTy::value_type &red() { return ArrayTy::operator[](0); }
-  typename ArrayTy::value_type &green() { return ArrayTy::operator[](1); }
-  typename ArrayTy::value_type &blue() { return ArrayTy::operator[](2); }
+  const typename ArrayTy::value_type red() const { return ArrayTy::operator[](0); }
+  const typename ArrayTy::value_type green() const { return ArrayTy::operator[](1); }
+  const typename ArrayTy::value_type blue() const { return ArrayTy::operator[](2); }
 
-  typename ArrayTy::value_type &red(typename ArrayTy::value_type val) { return red() = val; }
-  typename ArrayTy::value_type &green(typename ArrayTy::value_type val) { return green() = val; }
-  typename ArrayTy::value_type &blue(typename ArrayTy::value_type val) { return blue() = val; }
+  void red(typename ArrayTy::value_type val) { ArrayTy::operator[](0) = val; }
+  void green(typename ArrayTy::value_type val) { ArrayTy::operator[](1) = val; }
+  void blue(typename ArrayTy::value_type val) { ArrayTy::operator[](2) = val; }
 };
 
 template<class ArrayTy>
@@ -50,15 +49,15 @@ public:
   template<class... Args>
   PixelAccessTrait(Args... values) : ArrayTy(values...) {}
 
-  typename ArrayTy::value_type &red() { return ArrayTy::operator[](0); }
-  typename ArrayTy::value_type &green() { return ArrayTy::operator[](1); }
-  typename ArrayTy::value_type &blue() { return ArrayTy::operator[](2); }
-  typename ArrayTy::value_type &alpha() { return ArrayTy::operator[](3); }
+  const typename ArrayTy::value_type red() const { return ArrayTy::operator[](0); }
+  const typename ArrayTy::value_type green() const { return ArrayTy::operator[](1); }
+  const typename ArrayTy::value_type blue() const { return ArrayTy::operator[](2); }
+  const typename ArrayTy::value_type alpha() const { return ArrayTy::operator[](3); }
 
-  typename ArrayTy::value_type &red(typename ArrayTy::value_type val) { return red() = val; }
-  typename ArrayTy::value_type &green(typename ArrayTy::value_type val) { return green() = val; }
-  typename ArrayTy::value_type &blue(typename ArrayTy::value_type val) { return blue() = val; }
-  typename ArrayTy::value_type &alpha(typename ArrayTy::value_type val) { return alpha() = val; }
+  void red(typename ArrayTy::value_type val) { ArrayTy::operator[](0) = val; }
+  void green(typename ArrayTy::value_type val) { ArrayTy::operator[](1) = val; }
+  void blue(typename ArrayTy::value_type val) { ArrayTy::operator[](2) = val; }
+  void alpha(typename ArrayTy::value_type val) { ArrayTy::operator[](3) = val; }
 };
 
 template<size_t size>

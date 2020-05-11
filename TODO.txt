@@ -1,0 +1,9 @@
+
+* Physically Based Rendering  
+  https://learnopengl.com/PBR/Theory  
+  https://github.com/Nadrin/PBR  
+
+
+* Bullet physics library  
+  https://github.com/bulletphysics/bullet3  
+

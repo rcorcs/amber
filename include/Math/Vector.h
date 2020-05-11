@@ -101,11 +101,11 @@ public:
   VectorAccessTrait(Args... values) : ArrayTy(values...) {}
 
 
-  typename ArrayTy::value_type &x() { return ArrayTy::operator[](0); }
-  typename ArrayTy::value_type &y() { return ArrayTy::operator[](1); }
+  const typename ArrayTy::value_type x() const { return ArrayTy::operator[](0); }
+  const typename ArrayTy::value_type y() const { return ArrayTy::operator[](1); }
 
-  typename ArrayTy::value_type &x(typename ArrayTy::value_type val) { return ArrayTy::operator[](0) = val; }
-  typename ArrayTy::value_type &y(typename ArrayTy::value_type val) { return ArrayTy::operator[](1) = val; }
+  void x(typename ArrayTy::value_type val) { ArrayTy::operator[](0) = val; }
+  void y(typename ArrayTy::value_type val) { ArrayTy::operator[](1) = val; }
 };
 
 template<class ArrayTy>
@@ -115,13 +115,13 @@ public:
   template<class... Args>
   VectorAccessTrait(Args... values) : ArrayTy(values...) {}
 
-  typename ArrayTy::value_type &x() { return ArrayTy::operator[](0); }
-  typename ArrayTy::value_type &y() { return ArrayTy::operator[](1); }
-  typename ArrayTy::value_type &z() { return ArrayTy::operator[](2); }
+  const typename ArrayTy::value_type x() const { return ArrayTy::operator[](0); }
+  const typename ArrayTy::value_type y() const { return ArrayTy::operator[](1); }
+  const typename ArrayTy::value_type z() const { return ArrayTy::operator[](2); }
 
-  typename ArrayTy::value_type &x(typename ArrayTy::value_type val) { return ArrayTy::operator[](0) = val; }
-  typename ArrayTy::value_type &y(typename ArrayTy::value_type val) { return ArrayTy::operator[](1) = val; }
-  typename ArrayTy::value_type &z(typename ArrayTy::value_type val) { return ArrayTy::operator[](2) = val; }
+  void x(typename ArrayTy::value_type val) { ArrayTy::operator[](0) = val; }
+  void y(typename ArrayTy::value_type val) { ArrayTy::operator[](1) = val; }
+  void z(typename ArrayTy::value_type val) { ArrayTy::operator[](2) = val; }
 };
 
 template<class ArrayTy>
@@ -131,15 +131,15 @@ public:
   template<class... Args>
   VectorAccessTrait(Args... values) : ArrayTy(values...) {}
 
-  typename ArrayTy::value_type &x() { return ArrayTy::operator[](0); }
-  typename ArrayTy::value_type &y() { return ArrayTy::operator[](1); }
-  typename ArrayTy::value_type &z() { return ArrayTy::operator[](2); }
-  typename ArrayTy::value_type &w() { return ArrayTy::operator[](3); }
+  const typename ArrayTy::value_type x() const { return ArrayTy::operator[](0); }
+  const typename ArrayTy::value_type y() const { return ArrayTy::operator[](1); }
+  const typename ArrayTy::value_type z() const { return ArrayTy::operator[](2); }
+  const typename ArrayTy::value_type w() const { return ArrayTy::operator[](3); }
 
-  typename ArrayTy::value_type &x(typename ArrayTy::value_type val) { return ArrayTy::operator[](0) = val; }
-  typename ArrayTy::value_type &y(typename ArrayTy::value_type val) { return ArrayTy::operator[](1) = val; }
-  typename ArrayTy::value_type &z(typename ArrayTy::value_type val) { return ArrayTy::operator[](2) = val; }
-  typename ArrayTy::value_type &w(typename ArrayTy::value_type val) { return ArrayTy::operator[](3) = val; }
+  void x(typename ArrayTy::value_type val) { ArrayTy::operator[](0) = val; }
+  void y(typename ArrayTy::value_type val) { ArrayTy::operator[](1) = val; }
+  void z(typename ArrayTy::value_type val) { ArrayTy::operator[](2) = val; }
+  void w(typename ArrayTy::value_type val) { ArrayTy::operator[](3) = val; }
 };
 
 template<class ArrayTy>

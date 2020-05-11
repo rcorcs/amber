@@ -7,7 +7,6 @@
 template<size_t dim>
 class Body : public Vector<float, dim> {
   using Base = Vector<float, dim>;
-  
   Vector<float, dim> a; //acceleration
   float m;
 public:
@@ -17,8 +16,9 @@ public:
 
   Body () : Base(0,0), a(0,0), m(1) {}
 
-  Vector<float, dim> &acceleration() { return a; }
   float mass() { return m; }
+
+  Vector<float, dim> &acceleration() { return a; }
 
   void apply(Force<dim> force) {
     acceleration().add(force.div(mass()));
@@ -28,3 +28,4 @@ public:
     Base::add(acceleration());
   }
 };
+

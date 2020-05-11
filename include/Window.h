@@ -33,7 +33,7 @@ public:
             return;
         }
 
-        if (resizable) glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+        if (!resizable) glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
         glfwWindowPtr = glfwCreateWindow(width, height, titleStr.c_str(), NULL, NULL);
         globalContexts[glfwWindowPtr] = Context(this);
 

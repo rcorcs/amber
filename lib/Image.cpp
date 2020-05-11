@@ -247,8 +247,8 @@ void ImageIO::writeJPEG(Image &img, const char *filepath, int quality) {
    */
   cinfo.image_width = img.width(); 	/* image width and height, in pixels */
   cinfo.image_height = img.height();
-  cinfo.input_components = img.channels();		/* # of color components per pixel */
-  switch(img.channels()) {
+  cinfo.input_components = img.depth();		/* # of color components per pixel */
+  switch(img.depth()) {
   case 4:
     cinfo.in_color_space = JCS_EXT_RGBA; 	/* colorspace of input image */
     break;
@@ -282,7 +282,7 @@ void ImageIO::writeJPEG(Image &img, const char *filepath, int quality) {
    * To keep things simple, we pass one scanline per call; you can pass
    * more if you wish, though.
    */
-  row_stride = img.width() * img.channels();	/* JSAMPLEs per row in image_buffer */
+  row_stride = img.width() * img.depth();	/* JSAMPLEs per row in image_buffer */
 
   while (cinfo.next_scanline < cinfo.image_height) {
     /* jpeg_write_scanlines expects an array of pointers to scanlines.
