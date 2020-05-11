@@ -59,7 +59,7 @@ public:
 int main(int argc, char **argv) {
     srand (time(NULL));
 
-    Window window(640, 480, "Flappy", false, RangeRGBA(0,0,0,0));
+    Window window(DEFAULT_HEIGHT, DEFAULT_WIDTH, "Flappy", false, RangeRGBA(0,0,0,0));
 
     Force<2> gravity = Force2D::down(0.25f);
 
@@ -82,21 +82,19 @@ int main(int argc, char **argv) {
 
         if (dead) return;
         flappy.move();
-        for (auto it = walls.begin(), e = walls.end(); it!=e; ) {
-            auto last = it;
-            it++;
-            (*last).move();
-
-            dead = dead || flappy.collision(*last);
-
-            if ( (*last).x() + (*last).width() < 0) {
-                walls.erase(last);
-                points++;
-                printf("Points: %ld\n", points);
-            }
+        for (auto &wall : walls) {
+            wall.move();
+            dead = dead || flappy.collision(wall);
         }
         if (dead) {
             flappy.color = RangeRGBA(1.f,0.2f,0.2f,1.f);
+        }
+
+        auto &firstWall = walls.front();
+        if (firstWall.x() + firstWall.width()/2.f < 0) {
+            walls.pop_front();
+            points++;
+            printf("Points: %ld\n", points);
         }
 
         if (flappy.y() < flappy.height()/2.f) {

@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    Window window(DEFAULT_WIDTH, DEFAULT_HEIGHT, "Image Viewer", true, RangeRGBA(1,1,1,1));
+    Window window(DEFAULT_HEIGHT, DEFAULT_WIDTH, "Image Viewer", true, RangeRGBA(1,1,1,1));
 
     Texture image = TextureIO::loadFromFile(argv[1]);
     if ( image.empty() ) {
