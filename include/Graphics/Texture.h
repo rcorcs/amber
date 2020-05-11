@@ -7,6 +7,7 @@
 class Texture : public Dimentional<size_t, 3> {
   using Dim = Dimentional<size_t, 3>;
   GLuint id;
+  bool valid;
 
   using Dim::resize;
   using Dim::size;
@@ -14,6 +15,9 @@ class Texture : public Dimentional<size_t, 3> {
 
 public:
     Texture(Image image) : Dim(image.width(),image.height(),image.depth()) {
+        valid = false;
+        if (image.begin()==nullptr) return;
+
         int pixelFormat = (image.depth()==4)?GL_RGBA:GL_RGB;
 
         /* OpenGL texture binding of the image */
@@ -24,6 +28,8 @@ public:
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
         glTexImage2D( GL_TEXTURE_2D, 0, pixelFormat, image.width(), image.height(), 0, pixelFormat, GL_UNSIGNED_BYTE, (GLvoid *) image.begin() );
+
+        valid = true;
     }
 
     GLuint glId() { return id; }
@@ -31,7 +37,10 @@ public:
     void release() {
       /* Delete used resources and quit */
       glDeleteTextures(1, &id);
+      valid = false;
     }
+
+    const bool empty() const { return !valid; }
 };
 
 class TextureIO {

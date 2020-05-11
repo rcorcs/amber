@@ -11,5 +11,5 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 add_subdirectory(lib)
-add_subdirectory(experiments)
+add_subdirectory(samples)
 add_subdirectory(unittest)

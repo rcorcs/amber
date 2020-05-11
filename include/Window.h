@@ -26,7 +26,8 @@ class Window {
     double msPerFrame;
 public:
     std::function<void (Window &, int, int, int, int)> keyEventHandler;
-    Window(size_t width, size_t height, std::string name, bool resizable, RangeRGBA bgColor) : glfwWindowPtr(nullptr), titleStr(name) {
+
+    Window(size_t height, size_t width, std::string name, bool resizable, RangeRGBA bgColor) : glfwWindowPtr(nullptr), titleStr(name) {
 
         // start GL context and O/S window using the GLFW helper library
         if (!glfwInit()) {
@@ -68,6 +69,10 @@ public:
 
     void close() {
       glfwSetWindowShouldClose(glfwWindowPtr, GL_TRUE);
+    }
+
+    void resize(size_t height, size_t width) {
+        glfwSetWindowSize(glfwWindowPtr,width,height);
     }
 
     size_t width() {
